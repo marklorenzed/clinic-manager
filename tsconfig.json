@@ -21,9 +21,11 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/styles/*": ["./src/styles/*"],
-      "@/lib/*": ["./src/lib/*"],
+      "@/app/*": ["./src/app/*"],
       "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/store/*": ["./src/store/*"],
+      "@/styles/*": ["./src/styles/*"],
       "@/ui/*": ["./src/components/ui/*"]
     }
   },

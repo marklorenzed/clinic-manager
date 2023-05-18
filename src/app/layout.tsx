@@ -24,12 +24,14 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-slate-50 dark:bg-slate-900 antialiased">
         <Providers>
-          {children}
-
-          <Toaster position="bottom-right" />
-
           {/* @ts-expect-error Server Component*/}
           <Navbar />
+          <Toaster position="bottom-right" />
+          <div className="relative h-screen flex -items-center justify-center overflow-x-hidden">
+            <div className="container max-w-7xl  mx-auto  w-full h-full">
+              {children}
+            </div>
+          </div>
         </Providers>
 
         {/* Allow for more height on mobile devices */}
