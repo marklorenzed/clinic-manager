@@ -5,7 +5,7 @@ import { cn } from '../lib/utils'
 // import { cn } from '@/lib/utils'
 
 export const paragraphVariants = cva(
-  'max-w-prose text-slate-700 dark:text-slate-300 mb-2 text-center',
+  'max-w-prose text-zinc-700 dark:text-zinc-300 mb-2 text-center',
   {
     variants: {
       size: {

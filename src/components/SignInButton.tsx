@@ -1,33 +1,26 @@
 "use client";
 
 import { FC, useState } from "react";
-import Button from "./ui/Button";
-import { signIn } from "next-auth/react";
+import Button, { buttonVariants } from "./ui/Button";
 import { toast } from "@/ui/Toast";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface SignInButtonProps {}
 
 const SignInButton: FC<SignInButtonProps> = ({}) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const signInWithGoogle = async () => {
-    setIsLoading(true);
-
-    try {
-      await signIn("google");
-    } catch (error) {
-      toast({
-        title: "Error signing in",
-        message: "Please try again later",
-        type: "error",
-      });
-    }
-  };
-
   return (
-    <Button onClick={signInWithGoogle} isLoading={isLoading}>
+    <Link
+      href="/sign-in"
+      className={cn(
+        buttonVariants({ variant: "outline", size: "lg" }),
+        "flex-1"
+      )}
+    >
       Sign in
-    </Button>
+    </Link>
   );
 };
 

@@ -3,7 +3,7 @@
 import { FC, useState } from "react";
 import Button from "./ui/Button";
 import { cn } from "@/lib/utils";
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 import { toast } from "./ui/Toast";
 
 const UserAuthForm: FC = () => {
@@ -13,7 +13,7 @@ const UserAuthForm: FC = () => {
     setIsLoading(true);
 
     try {
-      await signIn("google");
+      // await signIn("google");
     } catch (error) {
       toast({
         title: "Errror",
@@ -29,7 +29,7 @@ const UserAuthForm: FC = () => {
     <div className={cn("flex justify-center")}>
       <Button
         isLoading={isLoading}
-        className="max-w-sm w-full bg-slate-200"
+        className="max-w-sm w-full bg-zinc-200"
         onClick={loginWithGoogle}
       >
         {isLoading ? null : (

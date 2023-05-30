@@ -48,7 +48,7 @@ const CreateOrganizationForm: FC = ({}) => {
       <Input
         type="text"
         value={name}
-        className="w-full text-3xl lg:text-5xl font-bold"
+        className="w-full text-sm lg:text-5xl font-bold dark:text-white"
         onChange={(e) => {
           dispatch(setCreate({ name: e.target.value }));
         }}

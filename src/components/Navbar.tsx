@@ -1,18 +1,16 @@
-import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { FC } from "react";
 import { buttonVariants } from "@/ui/Button";
 import SignInButton from "@/components/SignInButton";
-import SignOutButton from "@/components/SignOutButton";
 import ThemeToggle from "@/components/ThemeToggle";
-import { authOptions } from "@/lib/auth";
 import SelectedOrganization from "./SelectedOrganization";
+import UserDropDown from "./UserDropDown";
+import { getSession } from "@/app/supabase-server";
 
 const Navbar = async ({}) => {
-  const session = await getServerSession(authOptions);
-
+  const session = await getSession();
+  console.log("session", session)
   return (
-    <div className="fixed backdrop-blur-sm bg-white-/75 dark:bg-slate-900 z-50 top-0 left-0 right-0 h-20 border-b border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between">
+    <div className="fixed backdrop-blur-sm bg-white-/75 dark:bg-zinc-900 z-50 top-0 left-0 right-0 h-20 border-b border-zinc-300 dark:border-zinc-700 shadow-sm flex items-center justify-between">
       <div className="container max-w-7xl mx-auto w-full flex justify-between items-center">
         <Link href="/" className={buttonVariants({ variant: "link" })}>
           Clinic Manager 1.0
@@ -27,13 +25,7 @@ const Navbar = async ({}) => {
 
           {session ? (
             <>
-              <Link
-                href="/dashboard"
-                className={buttonVariants({ variant: "ghost" })}
-              >
-                Dashboard
-              </Link>
-              <SignOutButton />
+              <UserDropDown user={session.user}/>
             </>
           ) : (
             <SignInButton />
