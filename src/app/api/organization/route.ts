@@ -1,7 +1,8 @@
 import { db } from "@/lib/db";
-import { currentUser } from "@clerk/nextjs/server";
 import { Prisma } from "@prisma/client";
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from 'next/headers'
 
 export async function GET(req: NextRequest, res: NextResponse) {
   //   const { searchParams } = new URL(req.url);
@@ -14,8 +15,10 @@ export async function GET(req: NextRequest, res: NextResponse) {
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { name } = body;
-  const user = await currentUser();
-
+  const supabase = createRouteHandlerClient({ cookies })
+  const response = await supabase.auth.getUser()
+  const user = response.data.user;
+  
   if (!user) {
     return new NextResponse(JSON.stringify({ message: "Unauthorized " }), {
       status: 401,
