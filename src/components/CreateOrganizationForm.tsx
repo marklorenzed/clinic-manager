@@ -8,10 +8,12 @@ import { setCreate } from "@/store/organizationSlice";
 import { AppDispatch, RootState } from "@/store";
 import LargeHeading from "./LargeHeading";
 import Button from "./ui/Button";
-import axios from "axios";
+
 import { toast } from "./ui/Toast";
 import { Organization } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import { useSupabase } from "@/app/supabase-provider";
+import axios from "@/lib/axios";
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -20,10 +22,20 @@ const CreateOrganizationForm: FC = ({}) => {
   const dispatch = useAppDispatch();
   const { name } = useAppSelector((state) => state.organization.create);
   const router = useRouter();
+  const { supabase } = useSupabase();
 
   const createOrganization = async () => {
     try {
-      const data = await axios.post("/api/organization", { name });
+      const session = await supabase.auth.getSession();
+      const data = await axios.post(
+        "/api/organization",
+        { name, address: "" },
+        {
+          headers: {
+            Authentication: session.data.session?.access_token,
+          },
+        }
+      );
       const organization: Organization = data.data;
 
       toast({

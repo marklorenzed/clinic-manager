@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export default async function SignIn() {
   const { data } = await supabase.auth.getSession();
   const user = data.session?.user
-  console.log("data", data)
+
   if (user) redirect("/");
 
   return (
