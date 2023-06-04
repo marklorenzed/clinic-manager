@@ -1,12 +1,15 @@
-import { ChevronLeft, ChevronRight, Moon, Sun, Laptop, Mail } from "lucide-react";
+import { ChevronLeft, ChevronRight, Moon, Sun, Laptop, Mail, ChevronDownIcon, Calendar as CalendarIcon, Loader2 } from "lucide-react";
 
 const Icons = {
   ChevronLeft,
   ChevronRight,
+  ChevronDownIcon,
   Sun,
   Moon,
   Laptop,
-  Mail
+  Mail,
+  CalendarIcon,
+  Loader2
 };
 
 export default Icons;

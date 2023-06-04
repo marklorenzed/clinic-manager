@@ -1,38 +1,49 @@
+"use client";
+
 import { buttonVariants } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { FC, ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import Tabs from "./Tabs";
 
-const page = ({ children }: { children: React.ReactNode }) => {
+interface LayoutProps {
+  children: ReactNode;
+  params: {
+    id: string;
+  };
+}
+
+const Layout: FC<LayoutProps> = ({ children, params }) => {
+  const pathname = usePathname();
+  const activeLink = () => {
+    const slugs = pathname?.split("/");
+
+    const activeLink = slugs ? slugs[slugs.length - 1] : [];
+    return activeLink;
+  };
   return (
     <div className="pt-32 flex flex-col">
-      <div className="w-full flex gap-5 justify-center pb-12">
-        <div
-          className={cn(
-            buttonVariants({ variant: "subtle" }),
-            "bg-zinc-600 cursor-pointer text-white"
-          )}
-        >
-          Schedule
-        </div>
-        <div
-          className={cn(
-            buttonVariants({ variant: "subtle" }),
-            "bg-zinc-600 cursor-pointer text-white"
-          )}
-        >
-          Doctors
-        </div>
-        <div
-          className={cn(
-            buttonVariants({ variant: "subtle" }),
-            "bg-zinc-600 cursor-pointer text-white"
-          )}
-        >
-          Patients
-        </div>
+      <div className="w-full flex gap-10 justify-center pb-12">
+        <Tabs
+          title={"Schedule"}
+          href={`/organization/${params.id}`}
+          isActive={activeLink() === params.id}
+        />
+        <Tabs
+          title={"Employees"}
+          href={`/organization/${params.id}}/employees`}
+          isActive={activeLink() === "employees"}
+        />
+        <Tabs
+          title={"Patients"}
+          href={`/organization/${params.id}}/patients`}
+          isActive={activeLink() === "patients"}
+        />
       </div>
       <div>{children}</div>
     </div>
   );
 };
 
-export default page;
+export default Layout;

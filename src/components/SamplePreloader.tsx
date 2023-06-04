@@ -1,20 +1,22 @@
 "use client";
 
-import { store } from "@/store";
-import { setOrganizationsList } from "@/store/organizationSlice";
+import { setOrganizationsList } from "@/redux/features/organizationSlice";
+import { store } from "@/redux/store";
 import { Organization } from "@prisma/client";
 import { useRef } from "react";
 
 export default function Preloader({
   organizations,
 }: {
-  organizations: Organization[];
+  organizations?: Organization[];
 }) {
   const loaded = useRef(false);
 
   if (!loaded.current) {
     // store it in redux on client side
-    store.dispatch(setOrganizationsList(organizations));
+    if (organizations) {
+      store.dispatch(setOrganizationsList(organizations));
+    }
     loaded.current = true;
   }
 

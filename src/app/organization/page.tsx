@@ -1,19 +1,14 @@
 import LargeHeading from "@/components/LargeHeading";
 import OrganizationsList from "@/components/OrganizationsList";
 import { buttonVariants } from "@/components/ui/Button";
-import axios from "@/lib/axios";
-import { db } from "@/lib/db";
-import { store } from "@/store";
-import { setOrganizationsList } from "@/store/organizationSlice";
-import { Organization } from "@prisma/client";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSession } from "../supabase-server";
 
-const page = async ({}) => {
-  // const user: User | null = await currentUser();
-  const session = await getSession()
-  if (!session?.user) return notFound();
+const OrganizationListPage = async ({}) => {
+  const session = await getSession();
+
+  if (!session) return notFound();
 
   return (
     <div className="h-full gap-6 flex flex-col items-center pt-32">
@@ -39,4 +34,4 @@ const page = async ({}) => {
   );
 };
 
-export default page;
+export default OrganizationListPage;

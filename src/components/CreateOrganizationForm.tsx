@@ -1,11 +1,6 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import type { TypedUseSelectorHook } from "react-redux";
-import { FC } from "react";
-import { Input } from "@mui/material";
-import { setCreate } from "@/store/organizationSlice";
-import { AppDispatch, RootState } from "@/store";
+import { FC, useState } from "react";
 import LargeHeading from "./LargeHeading";
 import Button from "./ui/Button";
 
@@ -14,22 +9,24 @@ import { Organization } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useSupabase } from "@/app/supabase-provider";
 import axios from "@/lib/axios";
-
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+import { Input } from "./ui/input";
 
 const CreateOrganizationForm: FC = ({}) => {
-  const dispatch = useAppDispatch();
-  const { name } = useAppSelector((state) => state.organization.create);
   const router = useRouter();
   const { supabase } = useSupabase();
+  const [name, setName] = useState('')
+  const [address, setAddress] = useState('')
+  const [error, setError] = useState({ name: '', address: '' })
 
   const createOrganization = async () => {
     try {
+      if(!name) {
+        return setError({ ...error, name: 'Name is required!' })
+      }
       const session = await supabase.auth.getSession();
       const data = await axios.post(
         "/api/organization",
-        { name, address: "" },
+        { name, address },
         {
           headers: {
             Authentication: session.data.session?.access_token,
@@ -55,20 +52,30 @@ const CreateOrganizationForm: FC = ({}) => {
   };
 
   return (
-    <>
-      <LargeHeading size={"sm"}>Organization Name:</LargeHeading>
+    <div className=" flex flex-col gap-4 px-12">
+      <LargeHeading size={"sm"}>Organization Name</LargeHeading>
       <Input
         type="text"
         value={name}
-        className="w-full text-sm lg:text-5xl font-bold dark:text-white"
+        className={`${error.name ? 'border-red-500' : ''}`}
         onChange={(e) => {
-          dispatch(setCreate({ name: e.target.value }));
+          setName(e.target.value)
+          setError({ ...error, name: '' })
+        }}
+      />
+      <LargeHeading size={"sm"}>Address</LargeHeading>
+      <Input
+        type="text"
+        value={address}
+        // className="w-full text-sm lg:text-5xl font-bold dark:text-white"
+        onChange={(e) => {
+          setAddress(e.target.value)
         }}
       />
       <Button variant="default" size={"lg"} onClick={createOrganization}>
         Create
       </Button>
-    </>
+    </div>
   );
 };
 

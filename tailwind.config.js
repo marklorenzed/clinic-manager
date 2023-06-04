@@ -18,9 +18,6 @@ module.exports = {
       },
     },
     extend: {
-      fontFamily: {
-        sans: ["var(--font-inter)", ...fontFamily.sans],
-      },
       colors: {
         ...colors,
         "light-gold": "#f5bc51",
@@ -60,9 +57,9 @@ module.exports = {
         },
       },
       borderRadius: {
-        // lg: `var(--radius)`,
-        // md: `calc(var(--radius) - 2px)`,
-        // sm: "calc(var(--radius) - 4px)",
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
