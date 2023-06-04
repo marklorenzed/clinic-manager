@@ -74,15 +74,14 @@ const SelectedOrganization: FC = ({}) => {
 
     fetchOrgs();
   }, []);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="px-4 gap-2" variant="subtle" size="sm">
+        <Button className="px-4 gap-2" variant="subtle" size="sm" disabled={!isLoading && organizationsList.length === 0}>
           {isLoading ? (
             <Icons.Loader2 className="animate-spin" />
           ) : (
-            selectedOrganization?.name || "Select An Organization"
+            organizationsList.length === 0 ? "No Organization" :  selectedOrganization?.name || "Select An Organization"
           )}
           <Icons.ChevronDownIcon className="h-4 dark:text-white text-zinc-900" />
         </Button>
