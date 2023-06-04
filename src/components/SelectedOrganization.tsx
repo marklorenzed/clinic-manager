@@ -53,7 +53,7 @@ const SelectedOrganization: FC = ({}) => {
       dispatch(setIsLoading(true));
       try {
         const { data } = await axios.get(
-          "http://localhost:8000/api/organization",
+          `${process.env.NEXT_PUBLIC_EXPRESS_API_BASE_URL}/api/organization`,
           {
             headers: {
               Authentication: session.data.session?.access_token,
