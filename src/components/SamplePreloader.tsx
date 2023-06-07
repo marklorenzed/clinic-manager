@@ -1,6 +1,6 @@
 "use client";
 
-import { setOrganizationsList } from "@/redux/features/organizationSlice";
+import { setIsLoading, setOrganizationsList } from "@/redux/features/organizationSlice";
 import { store } from "@/redux/store";
 import { Organization } from "@prisma/client";
 import { useRef } from "react";

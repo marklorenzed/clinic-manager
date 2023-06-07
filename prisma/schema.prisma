@@ -11,10 +11,11 @@ datasource db {
 }
 
 model Organization {
-  id      String  @id @default(auto()) @map("_id") @db.ObjectId
-  name    String  @unique
-  address String?
-  user    String
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  name        String        @unique
+  address     String?
+  user        String
+  Appointment Appointment[]
 }
 
 model Doctor {
@@ -24,10 +25,10 @@ model Doctor {
 }
 
 model Patient {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  firstName String
-  lastName  String
-  age       Int
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  firstName   String
+  lastName    String
+  age         Int
   appointment Appointment[]
 }
 
@@ -36,11 +37,14 @@ model Appointment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  date      DateTime
-  name      String
-  procedure String
-  doctor    Doctor?  @relation(fields: [doctorId], references: [id])
-  doctorId  String?  @db.ObjectId
-  patient   Patient  @relation(fields: [patientId], references: [id])
-  patientId String   @db.ObjectId
+  date           DateTime
+  status         String       @default("open")
+  procedure      String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String       @db.ObjectId
+  doctor         Doctor?      @relation(fields: [doctorId], references: [id])
+  doctorId       String?      @db.ObjectId
+  patient        Patient      @relation(fields: [patientId], references: [id])
+  patientId      String       @db.ObjectId
+  amount         Int
 }

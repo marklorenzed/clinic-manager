@@ -22,16 +22,14 @@ export default function UserDropDown({ user }: { user: User }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="rounded-full" variant="ghost" size="sm">
           <Image
-            className="rounded-full"
-            width={30}
+            className="rounded-full cursor-pointer"
+            width={40}
             height={30}
             src={user.user_metadata.avatar_url}
             alt="profilepic"
           />
-          <span className="sr-only">User Options</span>
-        </Button>
+          {/* <span className="sr-only">User Options</span> */}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" forceMount>
         <DropdownMenuItem disabled className="flex flex-col justify-start">

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 import SupabaseProvider from "./supabase-provider";
+import LayoutComponent from "./layoutComponent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,13 +32,14 @@ export default function RootLayout({
             <Toaster position="bottom-right" />
             <div className="relative h-screen flex -items-center justify-center overflow-x-hidden">
               <div className="container max-w-7xl  mx-auto  w-full h-full">
+                <LayoutComponent />
                 {children}
               </div>
             </div>
           </Providers>
 
           {/* Allow for more height on mobile devices */}
-          <div className="h-40 md:hidden" />
+          {/* <div className="h-40 md:hidden" /> */}
         </SupabaseProvider>
       </body>
     </html>

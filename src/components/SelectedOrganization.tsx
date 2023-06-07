@@ -43,6 +43,7 @@ const SelectedOrganization: FC = ({}) => {
   }, [pathname]);
 
   const changeSelectedOrganization = (org: Organization) => {
+    dispatch(setIsLoading(true));
     dispatch(setSelectedOrganization(org));
     router.push(`/organization/${org.id}`);
   };
