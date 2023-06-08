@@ -39,12 +39,12 @@ model Appointment {
 
   date           DateTime
   status         String       @default("open")
-  procedure      String
+  procedure      String[]
   organization   Organization @relation(fields: [organizationId], references: [id])
   organizationId String       @db.ObjectId
   doctor         Doctor?      @relation(fields: [doctorId], references: [id])
   doctorId       String?      @db.ObjectId
-  patient        Patient      @relation(fields: [patientId], references: [id])
-  patientId      String       @db.ObjectId
-  amount         Int
+  patient        Patient?      @relation(fields: [patientId], references: [id])
+  patientId      String?       @db.ObjectId
+  amount         Int?
 }
