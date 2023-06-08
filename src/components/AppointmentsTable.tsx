@@ -15,78 +15,85 @@ export const appointments: Appointment[] = [
     id: "INV001",
     date: new Date(),
     status: "open",
-    procedure: "adjust",
+    procedure: ["adjust"],
     patientId: 'Mark Lorenze Dumalaon',
     createdAt: new Date(),
     updatedAt: new Date(),
     doctorId: null,
-    amount: 0
+    amount: 0,
+    organizationId: '6477189e2d2d31adbaea7f14'
   },
   {
     id: "INV001",
     date: new Date(),
     status: "open",
-    procedure: "adjust",
+    procedure: ["adjust"],
     patientId: 'Mark Lorenze Dumalaon',
     createdAt: new Date(),
     updatedAt: new Date(),
     doctorId: null,
-    amount: 0
+    amount: 0,
+    organizationId: '6477189e2d2d31adbaea7f14'
   },
   {
         id: "INV001",
     date: new Date(),
     status: "open",
-    procedure: "adjust",
+    procedure: ["adjust"],
     patientId: 'Mark Lorenze Dumalaon',
     createdAt: new Date(),
     updatedAt: new Date(),
     doctorId: null,
-    amount: 0
+    amount: 0,
+    organizationId: '6477189e2d2d31adbaea7f14'
   },
   {
         id: "INV001",
     date: new Date(),
     status: "open",
-    procedure: "adjust",
+    procedure: ["adjust"],
     patientId: 'Mark Lorenze Dumalaon',
     createdAt: new Date(),
     updatedAt: new Date(),
     doctorId: null,
-    amount: 0
+    amount: 0,
+    organizationId: '6477189e2d2d31adbaea7f14'
   },
   {
         id: "INV001",
     date: new Date(),
     status: "open",
-    procedure: "adjust",
+    procedure: ["adjust"],
     patientId: 'Mark Lorenze Dumalaon',
     createdAt: new Date(),
     updatedAt: new Date(),
     doctorId: null,
-    amount: 0
+    amount: 0,
+    organizationId: '6477189e2d2d31adbaea7f14'
   },
   {
         id: "INV001",
     date: new Date(),
     status: "open",
-    procedure: "adjust",
+    procedure: ["adjust"],
     patientId: 'Mark Lorenze Dumalaon',
     createdAt: new Date(),
     updatedAt: new Date(),
     doctorId: null,
-    amount: 0
+    amount: 0,
+    organizationId: '6477189e2d2d31adbaea7f14'
   },
   {
     id: "INV001",
     date: new Date(),
     status: "open",
-    procedure: "adjust",
+    procedure: ["adjust"],
     patientId: 'Mark Lorenze Dumalaon',
     createdAt: new Date(),
     updatedAt: new Date(),
     doctorId: null,
-    amount: 0
+    amount: 0,
+    organizationId: '6477189e2d2d31adbaea7f14'
   },
 ];
 
