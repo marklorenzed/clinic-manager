@@ -11,7 +11,7 @@ import {
 import Button from "@/ui/Button";
 import { Organization } from "@prisma/client";
 import Icons from "./Icons";
-import { usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   setIsLoading,
@@ -29,21 +29,16 @@ const SelectedOrganization: FC = ({}) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { supabase } = useSupabase();
-  const pathname = usePathname();
 
-  useEffect(() => {
-    const pathnameSplit = pathname?.split("/");
-    if (pathnameSplit && pathnameSplit[1] === "organization" && pathnameSplit.length === 3) {
-      const id = pathnameSplit[pathnameSplit.length - 1];
-      const org = organizationsList.find((item) => item.id === id);
-      if (org) {
-        dispatch(setSelectedOrganization(org));
-      }
-    }
-  }, [pathname]);
+  const params = useParams()
+
+  if (!selectedOrganization) {
+    const id = params?.id;
+    const organization = organizationsList.find((org) => org.id === id);
+    if (organization) dispatch(setSelectedOrganization(organization))
+  }
 
   const changeSelectedOrganization = (org: Organization) => {
-    dispatch(setIsLoading(true));
     dispatch(setSelectedOrganization(org));
     router.push(`/organization/${org.id}`);
   };

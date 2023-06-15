@@ -18,18 +18,22 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
+import LoadingMask from "./LoadingMask";
+import Icons from "./Icons";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  isLoading: boolean;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  isLoading,
 }: DataTableProps<TData, TValue>) {
-    const [sorting, setSorting] = useState<SortingState>([])
- 
+  const [sorting, setSorting] = useState<SortingState>([]);
+
   const table = useReactTable({
     data,
     columns,
@@ -63,7 +67,15 @@ export function DataTable<TData, TValue>({
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows?.length ? (
+          {isLoading ? (
+            <TableRow>
+              <TableCell colSpan={columns.length} className="h-24">
+                  <div className="flex items-center justify-center">
+                    <Icons.Loader2  className="animate-spin"/>
+                  </div>
+              </TableCell>
+            </TableRow>
+          ) : table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}

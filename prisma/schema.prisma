@@ -26,8 +26,7 @@ model Doctor {
 
 model Patient {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
-  firstName   String
-  lastName    String
+  name        String        @unique
   age         Int
   appointment Appointment[]
 }
@@ -44,7 +43,7 @@ model Appointment {
   organizationId String       @db.ObjectId
   doctor         Doctor?      @relation(fields: [doctorId], references: [id])
   doctorId       String?      @db.ObjectId
-  patient        Patient?      @relation(fields: [patientId], references: [id])
-  patientId      String?       @db.ObjectId
+  patient        Patient?     @relation(fields: [patientId], references: [id])
+  patientId      String?      @db.ObjectId
   amount         Int?
 }

@@ -8,9 +8,10 @@ interface LayoutComponentProps {
 }
 
 const LayoutComponent: FC<LayoutComponentProps> = ({}) => {
-  const { isLoading } = useAppSelector((state) => state.organization);
+  const { organization, appointment } = useAppSelector((state) => state);
 
-  if (isLoading) return <LoadingMask />
+
+  if (organization.isLoading || appointment.isLoading) return <LoadingMask />
 
   return null
 };
